@@ -1,0 +1,77 @@
+﻿@model Project.Models.TransactionsModel
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<h1>Payment</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Cost
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var list_element in ViewBag.Cart)
+        {
+            <tr>
+                <td>
+                    @list_element.item.Name
+                </td>
+                <td>
+                    @list_element.item.Selling_Price
+                </td>
+                <td>
+                    @list_element.cartItem.Quantity
+                </td>
+                <td>
+                    @list_element.cartItem.Cost
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table cellspacing="20">
+    <tr>
+        <td><h5>Total Cost</h5></td>
+        <td>@ViewBag.TotalCost</td>
+    </tr>
+</table>
+
+<hr />
+
+<form asp-action="CheckOutItems">
+    <table cellspacing="20">
+        <tr>
+            <td><h5>Enter Payment</h5></td>
+            <td>
+                <div class="form-group">
+                    <input asp-for="Payment" class="form-control" />
+                    <span asp-validation-for="Payment" class="text-danger"></span>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div class="form-group">
+    <input type="submit" value="Make Payment" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to CheckOut</a>
+</div>

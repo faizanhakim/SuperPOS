@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Project.Models.AdminPinModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Admin Pins</h1>
+
+<p>
+    <a asp-action="Create">Create New Pin</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pin)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Pin)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-pin="@item.Pin">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

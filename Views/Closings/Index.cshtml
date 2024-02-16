@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Project.Models.ClosingModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Closings</h1>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Closing Date
+            </th>
+            <th>
+                Closing Time
+            </th>
+            <th>
+                Items Sold
+            </th>
+            <th>
+                Sales
+            </th>
+            <th>
+                Profit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Closeddate.ToShortDateString()
+            </td>
+            <td>
+                @item.ClosingTime.ToLongTimeString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemsSold)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sales)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profit)
+            </td>
+            <td>
+               <a asp-action="Details" asp-route-date="@item.Closeddate">Details</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<hr />
+<form asp-action="CloseDay">
+    <input type="submit" value="Close Day" class="btn btn-primary" />
+</form>
+

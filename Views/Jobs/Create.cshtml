@@ -1,0 +1,42 @@
+﻿@model Project.Models.JobsModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add New Job</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddJob">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="JobTitle" class="control-label"></label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Minsalary" class="control-label"></label>
+                <input asp-for="Minsalary" class="form-control" />
+                <span asp-validation-for="Minsalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Maxsalary" class="control-label"></label>
+                <input asp-for="Maxsalary" class="form-control" />
+                <span asp-validation-for="Maxsalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create Job" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

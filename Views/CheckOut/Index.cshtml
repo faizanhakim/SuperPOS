@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Project.Models.PurchasesModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Check Out Items</h1>
+
+<p>
+    <a asp-action="Create">Add Items</a>
+</p>
+<p>
+    <a asp-action="Search">Search by Name</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_id)
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var list_element in ViewBag.Cart) {
+        <tr>
+            <td>
+                    @list_element.cartItem.Product_id
+            </td>
+            <td>
+                    @list_element.item.Name
+            </td>
+            <td>
+                    @list_element.item.Selling_Price
+            </td>
+            <td>
+                    @list_element.cartItem.Quantity
+            </td>
+            <td>
+                    @list_element.cartItem.Cost
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@list_element.cartItem.Id">Edit</a> |
+                <a asp-action="DeleteItem" asp-route-id="@list_element.cartItem.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<hr/>
+<table cellspacing="20">
+    <tr>
+        <td><h5>Total Cost</h5></td>
+        <td>@ViewBag.TotalCost</td>
+    </tr>
+</table>
+<hr />
+<form asp-action="ClearAllItems">
+        <input type="submit" value="Clear All" class="btn btn-danger" /> 
+ </form>
+ <hr />
+<form asp-action="Payment">
+    <input type="submit" value="Check Out Items" class="btn btn-primary" />
+</form>

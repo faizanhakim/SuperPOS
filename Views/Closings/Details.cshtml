@@ -1,0 +1,145 @@
+﻿@model Project.Models.ClosingModel
+
+@{
+    ViewData["Title"] = "Detials";
+}
+
+<h3>Closing Details</h3>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-2">
+        Closing Date
+    </dt>
+    <dd class="col-sm-10">
+        @Model.Closeddate.ToShortDateString()
+    </dd>
+    <dt class="col-sm-2">
+        Closing Time
+    </dt>
+    <dd class="col-sm-10">
+        @Model.ClosingTime.ToLongTimeString()
+    </dd>
+    <dt class="col-sm-2">
+        Total Items Sold
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.ItemsSold)
+    </dd>
+    <dt class="col-sm-2">
+        Total Sales
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Sales)
+    </dd>
+    <dt class="col-sm-2">
+        Total Profit
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Profit)
+    </dd>
+</dl>
+
+<hr />
+
+<h5>Top 3 Sold Items</h5>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Selling Price
+            </th>
+            <th>
+                Quantity Sold
+            </th>
+            <th>
+                Total Sales
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TopProducts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Selling_Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SellingQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sales)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+<h4>Transactions</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Cost
+            </th>
+            <th>
+                Payment
+            </th>
+            <th>
+                User_id
+            </th>
+            <th>
+                Transaction Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.Transactions)
+        {
+            <tr>
+                <td>
+                   @item.Id
+                </td>
+                <td>
+                    @item.Cost
+                </td>
+                <td>
+                    @item.Payment
+                </td>
+                <td>
+                    @item.User_id
+                </td>
+                <td>
+                    @item.Transaction_date
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Transaction" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Index">Back to All Closings</a>
+</div>
+
